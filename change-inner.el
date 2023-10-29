@@ -1,4 +1,4 @@
-;;; change-inner.el --- Change contents based on semantic units
+;;; change-inner.el --- Change contents based on semantic units  -*- lexical-binding: t -*-
 
 ;; Copyright (C) 2012 Magnar Sveen <magnars@gmail.com>
 ;;               2022 Tony Zorman <soliditsallgood@mailbox.org>
@@ -25,14 +25,20 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program. If not, see <http://www.gnu.org/licenses/>.
 
+;;; Commentary:
+
+;; See the README.md.
+
 ;;; Code:
 
 (require 'puni)
-(eval-when-compile (require 'cl))
+(eval-when-compile (require 'cl-lib))
 
+(defun change-inner--puni-ignore-errors (oldfun)
+  "Wrap OLDFUN in `ignore-errors'"
+  (ignore-errors (funcall oldfun)))
 (advice-add 'puni-bounds-of-sexp-at-point :around
-  (lambda (oldfun)
-    (ignore-errors (oldfun))))
+  #'change-inner--puni-ignore-errors)
 
 (cl-defun change-inner--work (&key search-for mode)
   "Delete (the innards of) a semantic unit.
@@ -89,14 +95,14 @@ including nil)."
 
 (defun change-inner ()
   "Change the insides of a semantic unit.
-Emulates vim's 'ci'; see 'change-inner--work' for more
+Emulates vim's `ci'; see `change-inner--work' for more
 information."
   (interactive)
   (change-inner--work))
 
 (defun change-inner-outer ()
   "Change the outsides of a semantic unit.
-Emulates vim's 'co'; see 'change-inner--work' for more
+Emulates vim's `co'; see `change-inner--work' for more
 information."
   (interactive)
   (change-inner--work :mode 'outer))
@@ -104,6 +110,10 @@ information."
 (defun change-inner-around (&optional arg)
   "Change the insides or outsides of a semantic unit.
 If ARG is given, change the outsides; otherwise, do the same for
-the insides. See 'change-inner--work' for more information."
+the insides. See `change-inner--work' for more information."
   (interactive "P")
   (if arg (change-inner-outer) (change-inner)))
+
+(provide 'change-inner)
+
+;;; change-inner.el ends here
