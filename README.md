@@ -9,6 +9,8 @@ Instead of
 this fork requires
 [puni](https://github.com/AmaiKinono/puni)
 to work.
+A blog post going in some more details may be found
+[here](https://tony-zorman.com/posts/change-inner.html).
 
 A usage example, from the upstream repository:
 
