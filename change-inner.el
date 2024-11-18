@@ -65,8 +65,8 @@ including nil)."
            (when (> (point) (mark))
              (exchange-point-and-mark))
            (while (and (not (= (point) (point-min)))
-                       (not (looking-at q-char)))
-             (puni-expand-region))
+                       (not (looking-at q-char))
+                       (ignore-errors (or (puni-expand-region) t))))
            ;; If we haven't found one yet, initiate a forward search and
            ;; try again—once.
            (when (not (looking-at q-char))
