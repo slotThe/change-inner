@@ -8,7 +8,7 @@
 ;; Version: 0.3.0
 ;; URL: https://github.com/slotThe/change-inner
 ;; Keywords: convenience, extensions
-;; Package-Requires: ((expand-region "0.7"))
+;; Package-Requires: ((puni "0"))
 
 ;; This file is NOT part of GNU Emacs.
 ;;
