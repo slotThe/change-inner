@@ -93,6 +93,7 @@ including nil)."
                (clen (- re (cdr insides)))) ; Length of closing delimiter
           (kill-region (+ rb olen) (- re clen)))))))
 
+;;;###autoload
 (defun change-inner ()
   "Change the insides of a semantic unit.
 Emulates vim's `ci'; see `change-inner--work' for more
@@ -100,6 +101,7 @@ information."
   (interactive)
   (change-inner--work))
 
+;;;###autoload
 (defun change-inner-outer ()
   "Change the outsides of a semantic unit.
 Emulates vim's `co'; see `change-inner--work' for more
@@ -107,6 +109,7 @@ information."
   (interactive)
   (change-inner--work :mode 'outer))
 
+;;;###autoload
 (defun change-inner-around (&optional arg)
   "Change the insides or outsides of a semantic unit.
 If ARG is given, change the outsides; otherwise, do the same for
